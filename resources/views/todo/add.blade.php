@@ -13,6 +13,9 @@
       @csrf
       
         <div class="modal-body">
+
+            <ul id="errors" class="list-unstyle"></ul>
+
            <div class="form-group">
               <label for="txtName">Enter Todo TasK:</label>
               <input type="text" id="txtName" name="name" class="form-control" placeholder="Enter New Todo Task" required/>

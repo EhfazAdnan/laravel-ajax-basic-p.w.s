@@ -17,6 +17,10 @@ class TodoController extends Controller
     }
 
     public function save(Request $request){
+       $this->validate($request, [
+          'name' => 'required|min:10|max:100',
+       ]);
+
        $task = Todo::create($request->all());
        $tasks = Todo::all();
        return view('todo.index', compact('tasks'));
@@ -28,6 +32,10 @@ class TodoController extends Controller
     }
 
     public function update(Request $request){
+       $this->validate($request, [
+            'name' => 'required|min:10|max:100',
+       ]);
+
        $task = Todo::findOrFail($request->id);
        $task->name = $request->name;
        $task->save();

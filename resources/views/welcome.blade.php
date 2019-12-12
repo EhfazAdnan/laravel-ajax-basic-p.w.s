@@ -42,11 +42,30 @@
             });
           });
 
+          // add data
           $('#modals').on('submit','#frmAddTask', function(e){
               e.preventDefault();
               var frmData = $(this).serialize();
-              $.post('{{ URL::to("todo/save") }}', frmData, function(data, xhrStatus, xhr){
+
+              //   $.post('{{ URL::to("todo/save") }}', frmData, function(data, xhrStatus, xhr){
+              //       $('#todolist').empty().append(data);
+              //   });
+
+              $.ajax({
+                  url: '{{ URL::to("todo/save") }}',
+                  type: 'POST',
+                  data: frmData,
+              })
+              .done(function(data){
+                  $("#modals #errors").empty();
                   $('#todolist').empty().append(data);
+              })
+              .fail(function(error){
+                  var error = error.responseJSON;
+                  $("#modals #errors").empty();
+                  error.errors.name.forEach(function(element, index){
+                      $("#modals #errors").append('<li class="alert alert-danger">'+element+'</li>');
+                  })
               });
           });
 
