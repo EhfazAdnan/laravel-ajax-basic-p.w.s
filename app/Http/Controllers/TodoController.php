@@ -17,7 +17,9 @@ class TodoController extends Controller
     }
 
     public function save(Request $request){
-
+       $task = Todo::create($request->all());
+       $tasks = Todo::all();
+       return view('todo.index', compact('tasks'));
     }
 
     public function edit($id){
