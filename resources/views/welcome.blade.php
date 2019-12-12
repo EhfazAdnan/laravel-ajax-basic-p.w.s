@@ -49,6 +49,30 @@
                   $('#todolist').empty().append(data);
               });
           });
+
+          $('#todolist').on('click','.btnManage', function(){
+            var id = $(this).data('task');
+            $.get('{{ URL::to("todo/edit")}}/'+id, function(data){
+              $('#modals').empty().append(data);
+              $('#editTodoTask').modal('show');
+            });
+          });
+
+          $('#modals').on('submit','#frmEditTask', function(e){
+              e.preventDefault();
+              var frmData = $(this).serialize();
+              $.post('{{ URL::to("todo/update") }}', frmData, function(data, xhrStatus, xhr){
+                  $('#todolist').empty().append(data);
+              });
+          });
+
+          //delete request
+          $('#modals').on('click','#btnDelete', function(){
+            var id = $(this).data('task');
+            $.get('{{ URL::to("todo/destroy")}}/'+id, function(data){
+              $('#todolist').empty().append(data);
+            });
+          });
       })
     </script>
 </body>

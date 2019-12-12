@@ -11,7 +11,7 @@
           <ul class="list-group">
             @if($tasks->all())
                @foreach($tasks as $task)
-                  <li class="list-group-item">{{ $task->id }} - {{ $task->name }} <span class="float-right"><button type="button" class="btn btn-primary btn-sm btnManage">Edit</button></span></li>
+                  <li class="list-group-item">{{ $task->id }} - {{ $task->name }} <span class="float-right"><button type="button" data-task="{{$task->id}}" class="btn btn-primary btn-sm btnManage">Edit</button></span></li>
                @endforeach
             @else
               <li class="list-group-item">No Record Found...</li>
